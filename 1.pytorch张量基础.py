@@ -177,14 +177,14 @@ print(z1, x_1, x_2, y_1, y_2, y_3)
 # -6
 # [torch.FloatTensor of size 4x1]
 
-x1,x2 = torch.split(z1,2,dim=0)
-y1 = torch.split(z1,2,dim=1) 
-print(x1,x2,y1)
+x1, x2 = torch.split(z1, 2, dim=0)
+y1 = torch.split(z1, 2, dim=1)
+print(x1, x2, y1)
 
 #  1  2  3
 #  4  5  6
 # [torch.FloatTensor of size 2x3]
- 
+
 # -1 -2 -3
 # -4 -5 -6
 # [torch.FloatTensor of size 2x3]
@@ -194,7 +194,7 @@ print(x1,x2,y1)
 # -1 -2
 # -4 -5
 # [torch.FloatTensor of size 4x2]
-# , 
+# ,
 #  3
 #  6
 # -3
@@ -202,13 +202,12 @@ print(x1,x2,y1)
 # [torch.FloatTensor of size 4x1]
 # )
 
-
 #%%
 # 2.4 压缩
-x1=torch.FloatTensor(10,1,3,1,4)
-x2=torch.squeeze(x1)
-print(x1.shape,x2.shape,sep='\n')
-x3=torch.unsqueeze(x2,dim=1)
+x1 = torch.FloatTensor(10, 1, 3, 1, 4)
+x2 = torch.squeeze(x1)
+print(x1.shape, x2.shape, sep='\n')
+x3 = torch.unsqueeze(x2, dim=1)
 print(x3.shape)
 # torch.Size([10, 1, 3, 1, 4])
 # torch.Size([10, 3, 4])
@@ -216,10 +215,10 @@ print(x3.shape)
 
 #%%
 # 2.5 reshape
-x1=torch.arange(12)
-x2=x1.view(3,-1)
-x3=x1.view(2,-1,2)
-print(x1,x2,x3.shape)
+x1 = torch.arange(12)
+x2 = x1.view(3, -1)
+x3 = x1.view(2, -1, 2)
+print(x1, x2, x3.shape)
 #   0
 #   1
 #   2
@@ -233,7 +232,7 @@ print(x1,x2,x3.shape)
 #  10
 #  11
 # [torch.FloatTensor of size 12]
- 
+
 #   0   1   2   3
 #   4   5   6   7
 #   8   9  10  11
@@ -245,27 +244,79 @@ print(x1,x2,x3.shape)
 import torch.nn.init as init
 import numpy as np
 torch.manual_seed(1122)
-x1=init.uniform(torch.FloatTensor(3,4),a=0,b=9)
+x1 = init.uniform(torch.FloatTensor(3, 4), a=0, b=9)
 #(a,b)之间的均匀分布
-x2=init.normal(torch.FloatTensor(3,4),mean=1,std=0.2)
+x2 = init.normal(torch.FloatTensor(3, 4), mean=1, std=0.2)
 #均值为mean,标准差为std的正态分布
-x3=init.constant(torch.FloatTensor(3,4),np.pi)
-print(x1,x2,x3)
+x3 = init.constant(torch.FloatTensor(3, 4), np.pi)
+print(x1, x2, x3)
 #  7.5625  1.2449  5.0721  1.7665
 #  2.2013  7.4314  0.5377  4.7879
 #  3.9812  7.2177  1.0897  8.2409
 # [torch.FloatTensor of size 3x4]
- 
+
 #  1.1815  1.1046  0.8012  1.1516
 #  0.9263  0.7831  1.0669  0.9992
 #  0.9842  0.8979  0.6505  1.2469
 # [torch.FloatTensor of size 3x4]
- 
+
 #  3.1416  3.1416  3.1416  3.1416
 #  3.1416  3.1416  3.1416  3.1416
 #  3.1416  3.1416  3.1416  3.1416
 # [torch.FloatTensor of size 3x4]
 
-
 #%%
 # 4 数学操作
+# 4.1算术运算
+x1 = torch.FloatTensor([[1, 2, 3], [3, 5, 5]])
+x2 = torch.FloatTensor([[1, 2, 3], [3, 2, 1]])
+print(x1, x2, x1 + x2, x1 - x2)
+x3 = x1 + 10  #broadcasting
+print(x3)
+#乘法
+x4 = torch.mul(x1, x2)  #等同于x1*x2
+x5 = x1 * x2
+x6 = x1 * 10
+print(x4, x5, x6)  #broadcasting
+#除法
+x7 = x1 / x2
+print(x7)
+
+#%%
+# 4.2 其他数学运算
+x1 = torch.FloatTensor([[1, 2, 3], [3, 5, 5]])
+x2 = x1**2  #对每个元素求平方
+x3 = torch.exp(x1)  #求指数
+x4 = torch.log(x1)  #求对数
+print(x1, x2, x3, x4)
+
+#%%
+# 4.3 矩阵运算
+x1 = torch.Tensor(torch.arange(1, 13).view(3, 4))
+x2 = torch.ones(4, 5)
+x3 = torch.mm(x1, x2)
+print(x1, x2, x3)
+
+#批量矩阵运算
+x1 = torch.FloatTensor(10, 3, 4)
+x2 = torch.FloatTensor(10, 4, 6)
+x3 = torch.bmm(x1, x2)  #前面的10为批量
+print(x3.shape)  #torch.Size([10, 3, 6])
+
+#点乘
+x1 = torch.FloatTensor((3, 4))
+x2 = torch.FloatTensor((3, 2))
+
+x3 = torch.dot(x1, x2)
+print(x3)
+
+#转置
+x1 = torch.Tensor(torch.arange(1, 13).view(3, 4))
+x2 = x1.t()
+print(x1, x2)
+
+#维度调换
+x1 = torch.FloatTensor(10, 3, 4)
+print(x1.shape, x1.transpose(1, 2).shape)
+# torch.Size([10, 3, 4]) torch.Size([10, 4, 3])
+print(x1.transpose(0, 1).transpose(1, 2).shape)  #torch.Size([3, 4, 10])
