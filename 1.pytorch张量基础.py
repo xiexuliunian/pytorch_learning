@@ -244,11 +244,11 @@ print(x1, x2, x3.shape)
 import torch.nn.init as init
 import numpy as np
 torch.manual_seed(1122)
-x1 = init.uniform(torch.FloatTensor(3, 4), a=0, b=9)
+x1 = init.uniform_(torch.FloatTensor(3, 4), a=0, b=9)
 #(a,b)之间的均匀分布
-x2 = init.normal(torch.FloatTensor(3, 4), mean=1, std=0.2)
+x2 = init.normal_(torch.FloatTensor(3, 4), mean=1, std=0.2)
 #均值为mean,标准差为std的正态分布
-x3 = init.constant(torch.FloatTensor(3, 4), np.pi)
+x3 = init.constant_(torch.FloatTensor(3, 4), np.pi)
 print(x1, x2, x3)
 #  7.5625  1.2449  5.0721  1.7665
 #  2.2013  7.4314  0.5377  4.7879

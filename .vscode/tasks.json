@@ -1,0 +1,12 @@
+{
+	"version": "0.1.0",
+	"command": "${config:python.pythonPath}",
+	"isShellCommand": true,
+	"showOutput": "always",
+	"args": ["${file}"],
+	"options": {
+        "env": {
+            "PYTHONIOENCODING": "UTF-8"
+        }
+    }
+}

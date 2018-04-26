@@ -1,44 +1,30 @@
 #%%
 
 import torch
-from torch.autograd import Variable
+import numpy as np
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # 1 张量及变量
-x_tensor = torch.Tensor(torch.arange(1, 13).view(3, 4))
-print(x_tensor)
-#   1   2   3   4
-#   5   6   7   8
-#   9  10  11  12
-# [torch.FloatTensor of size 3x4]
-x_variable = Variable(x_tensor)
-print(x_variable)
-# Variable containing:
+x_tensor = torch.tensor(np.arange(1,13).reshape(3,4),dtype=torch.float32,requires_grad=True)
+# x_tensor=x_tensor.to(device)
+y_tensor =torch.tensor(torch.arange(1,13).reshape(3,4))#现在可以使用reshape了
+# x_tensor.requires_grad_(requires_grad=True)
+print(x_tensor,"\n",y_tensor)
 #   1   2   3   4
 #   5   6   7   8
 #   9  10  11  12
 # [torch.FloatTensor of size 3x4]
 
-# 封装张量
-# x_variable.data->x_tensor
-print(x_variable.data)
-#   1   2   3   4
-#   5   6   7   8
-#   9  10  11  12
-# [torch.FloatTensor of size
 
 #%%
 # 2 梯度
-print(x_variable.grad)  #None
-print(x_variable.requires_grad)  #False
-x_variable = Variable(x_tensor, volatile=True)
-# .volatile在推断过程中进行最小的内存使用，单个的volatile变量在整个图中,不需要梯度
-print(x_variable.grad, x_variable.requires_grad, x_variable.volatile)
-# None False True
+print(x_tensor.grad)  #None
+print(x_tensor.requires_grad)  #False
+
 
 #%%
 # 3 图和变量
-x = Variable(
-    torch.FloatTensor(torch.arange(1, 13).view(3, 4)), requires_grad=True)
+x = x_tensor
 print(x)
 y = x**2 + 4 * x
 z = 2 * y + 3
