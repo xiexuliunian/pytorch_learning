@@ -32,7 +32,7 @@ test_loader = torch.utils.data.DataLoader(
 
 # 5 模型
 class ConvolutionalNeuralNetwork(nn.Module):
-    def __init__(self,num_classes):
+    def __init__(self, num_classes):
         super(ConvolutionalNeuralNetwork, self).__init__()
         # 原图片大小为3x28x28
         self.layer1 = nn.Sequential(
@@ -45,14 +45,15 @@ class ConvolutionalNeuralNetwork(nn.Module):
             nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.MaxPool2d(2))  # 3x7x7
-        self.fc =nn.Linear(7*7*32,num_classes)
+        self.fc = nn.Linear(7 * 7 * 32, num_classes)
 
-    def forward(self,x):
-        out=self.layer1(x)
-        out=self.layer2(out)
-        out=out.reshape(out.size(0),-1)
-        out=self.fc(out)
+    def forward(self, x):
+        out = self.layer1(x)
+        out = self.layer2(out)
+        out = out.reshape(out.size(0), -1)
+        out = self.fc(out)
         return out
+
 
 # 6 实例化模型
 cnn = ConvolutionalNeuralNetwork(num_classes)
