@@ -68,21 +68,17 @@ for epoch in range(num_epochs):
         optimizer.step()
 
         if (i + 1) % 100 == 0:
-            print("Epoch [%d/%d] ,Step [%d/%d] ,Loss:%6.4f" % (
-                epoch + 1,
-                num_epochs,
-                i + 1,
-                len(train_dataset) // batch_size,
-                loss.item()
-            ))
+            print("Epoch [%d/%d] ,Step [%d/%d] ,Loss:%6.4f" %
+                  (epoch + 1, num_epochs, i + 1,
+                   len(train_dataset) // batch_size, loss.item()))
 # 9 测试模型
-correct=0
-total=0
-for images,labels in test_loader:
-    images =images.reshape(-1,28*28).to(device)
-    outputs=net(images)
-    _,predicted=torch.max(outputs.data,1)
-    total +=labels.size(0)
+correct = 0
+total = 0
+for images, labels in test_loader:
+    images = images.reshape(-1, 28 * 28).to(device)
+    outputs = net(images)
+    _, predicted = torch.max(outputs.data, 1)
+    total += labels.size(0)
     # correct +=(predicted==labels.to(device)).sum()
-    correct +=(predicted.cpu()==labels).sum()
-print("前向传播神经网络在10000个MNIST测试集图片的准确率为：%d %%"%(100*correct/total))
+    correct += (predicted.cpu() == labels).sum()
+print("前向传播神经网络在10000个MNIST测试集图片的准确率为：%d %%" % (100 * correct / total))

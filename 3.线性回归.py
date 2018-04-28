@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.init as init
 # from torch.autograd import Variable
-torch.manual_seed(11)#设置随机种子
+torch.manual_seed(11)  #设置随机种子
 # 2.生产数据
 #%%
 num_data = 1000
@@ -43,8 +43,7 @@ for i in range(num_epoch):
         print(loss)
         loss_arr.append(loss.item())
 
-
-param_list=list(model.parameters())
+param_list = list(model.parameters())
 # print(param_list[0].data,param_list[1].data)
 # print(param_list[0],param_list[1])
 print(param_list)

@@ -67,16 +67,16 @@ for epoch in range(num_epoch):
         if (i + 1) % 100 == 0:
             print('Epoch: [%d/%d], Step: [%d/%d], Loss: %.4f' %
                   (epoch + 1, num_epoch, i + 1,
-                   len(train_dataset)// batch_size, loss.item()))
-        
+                   len(train_dataset) // batch_size, loss.item()))
+
 correct = 0
 total = 0
 for images, labels in test_loader:
-    images = images.reshape(-1, 28*28).to(device)
+    images = images.reshape(-1, 28 * 28).to(device)
     outputs = model(images)
     _, predicted = torch.max(outputs.data, 1)
     total += labels.size(0)
     correct += (predicted.cpu() == labels).sum()
-    
+
 print('模型在10000张测试集的准确率为: %d %%' % (100 * correct / total))
 # epoch为10时，模型在10000张测试集的准确率为: 85 %

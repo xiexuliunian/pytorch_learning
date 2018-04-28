@@ -5,7 +5,7 @@ import torch
 # 1.1 产生随机数
 torch.manual_seed(111)  #s设置random的种子
 x = torch.rand(2, 3)  #均匀分布
-print("均匀分布：",x)
+print("均匀分布：", x)
 #0.7156  0.9140  0.2819
 #0.2581  0.6311  0.6001
 
@@ -26,7 +26,7 @@ d = torch.arange(0, 3, step=0.1)
 #开始,结束,步长;包含头尾共31个数
 e = torch.linspace(0, 3, 10)
 #开始,结束,共多少个,包含头尾
-print(a,"\n" ,b,"\n" , c,"\n" , d, "\n" , e)
+print(a, "\n", b, "\n", c, "\n", d, "\n", e)
 
 #%%
 # 1.3 张量数据类型
@@ -38,14 +38,14 @@ c = torch.FloatTensor([2, 3])
 #b,c具有一样的作用
 d = b.type_as(torch.IntTensor())  #2,3
 # 将张量从FloatTensor转变为IntTensor
-print(a,"\n" , b,"\n" , c,"\n" , d)
+print(a, "\n", b, "\n", c, "\n", d)
 
 #%%
 # 1.4 numpy和张量的互相转换
 import numpy as np
 a = np.array((1, 2, 3.5))
 b = torch.from_numpy(a)  #numpy转张量
-print(a,"\n" , b)
+print(a, "\n", b)
 c = b.numpy()  #张量转numpy
 print(c)
 
@@ -72,7 +72,7 @@ print(a.shape)
 torch.manual_seed(1122)
 a = torch.rand(4, 3)
 out = torch.index_select(a, 0, torch.LongTensor([0, 1]))
-print(a,"\n" , out)
+print(a, "\n", out)
 # a:
 # 0.8403  0.1383  0.5636
 # 0.1963  0.2446  0.8257
@@ -87,7 +87,7 @@ print(a,"\n" , out)
 a1 = a[:, 0]  #所有的行,第一列
 a2 = a[[0, 1], :]  #前两行,所有列,等同于out
 a3 = a[0:2, 0:2]  #前两行,前两列
-print(a1,"\n" , a2,"\n" , a3)
+print(a1, "\n", a2, "\n", a3)
 
 x = torch.Tensor([[1, 2, 3], [3, 4, 5]])
 #  1  2  3
@@ -101,7 +101,7 @@ out = torch.masked_select(x, mask)
 # 3
 # 4
 # [torch.FloatTensor of size 2]
-print(x,"\n" , mask,"\n" , out)
+print(x, "\n", mask, "\n", out)
 
 #%%
 # 2.2 Joining
@@ -118,7 +118,7 @@ z2 = torch.cat([x, y], dim=1)  #在第二个维度上进行叠加,2x6
 # 4  5  6 -4 -5 -6
 # [torch.FloatTensor of size 2x6]
 
-print(z1,"\n" , z2)
+print(z1, "\n", z2)
 x_stack = torch.stack([x, x, x], dim=0)
 #在一个新的维度上进行堆叠,dim=0,原来是2x3，这里在0维度上添加了三个x维度,
 #所以维度上变为3x2x3
@@ -144,7 +144,7 @@ z1 = torch.cat([x, y], dim=0)  #在第一个维度上进行叠加,4x3
 z2 = torch.cat([x, y], dim=1)  #在第二个维度上进行叠加,2x6
 x_1, x_2 = torch.chunk(z1, 2, dim=0)  #将z1在第一个维度上分成两个部分
 y_1, y_2, y_3 = torch.chunk(z1, 3, dim=1)  #将z1在第二个维度上分成三个部分
-print(z1,"\n" , x_1, "\n" ,x_2, "\n" ,y_1,"\n" , y_2,"\n" , y_3)
+print(z1, "\n", x_1, "\n", x_2, "\n", y_1, "\n", y_2, "\n", y_3)
 # 1  2  3
 # 4  5  6
 # -1 -2 -3
@@ -179,7 +179,7 @@ print(z1,"\n" , x_1, "\n" ,x_2, "\n" ,y_1,"\n" , y_2,"\n" , y_3)
 
 x1, x2 = torch.split(z1, 2, dim=0)
 y1 = torch.split(z1, 2, dim=1)
-print(x1, "\n" ,x2,"\n" , y1)
+print(x1, "\n", x2, "\n", y1)
 
 #  1  2  3
 #  4  5  6
@@ -218,7 +218,7 @@ print(x3.shape)
 x1 = torch.arange(12)
 x2 = x1.reshape(3, -1)
 x3 = x1.reshape(2, -1, 2)
-print(x1, x2, x3.shape,sep='\n')
+print(x1, x2, x3.shape, sep='\n')
 #   0
 #   1
 #   2
@@ -249,7 +249,7 @@ x1 = init.uniform_(torch.FloatTensor(3, 4), a=0, b=9)
 x2 = init.normal_(torch.FloatTensor(3, 4), mean=1, std=0.2)
 #均值为mean,标准差为std的正态分布
 x3 = init.constant_(torch.FloatTensor(3, 4), np.pi)
-print(x1, x2, x3,sep='\n')
+print(x1, x2, x3, sep='\n')
 #  7.5625  1.2449  5.0721  1.7665
 #  2.2013  7.4314  0.5377  4.7879
 #  3.9812  7.2177  1.0897  8.2409
@@ -270,14 +270,14 @@ print(x1, x2, x3,sep='\n')
 # 4.1算术运算
 x1 = torch.FloatTensor([[1, 2, 3], [3, 5, 5]])
 x2 = torch.FloatTensor([[1, 2, 3], [3, 2, 1]])
-print(x1, x2, x1 + x2, x1 - x2,sep='\n')
+print(x1, x2, x1 + x2, x1 - x2, sep='\n')
 x3 = x1 + 10  #broadcasting
 print(x3)
 #乘法
 x4 = torch.mul(x1, x2)  #等同于x1*x2
 x5 = x1 * x2
 x6 = x1 * 10
-print(x4, x5, x6,sep='\n')  #broadcasting
+print(x4, x5, x6, sep='\n')  #broadcasting
 #除法
 x7 = x1 / x2
 print(x7)
@@ -288,14 +288,14 @@ x1 = torch.FloatTensor([[1, 2, 3], [3, 5, 5]])
 x2 = x1**2  #对每个元素求平方
 x3 = torch.exp(x1)  #求指数
 x4 = torch.log(x1)  #求对数
-print(x1, x2, x3, x4,sep='\n')
+print(x1, x2, x3, x4, sep='\n')
 
 #%%
 # 4.3 矩阵运算
 x1 = torch.Tensor(torch.arange(1, 13).reshape(3, 4))
 x2 = torch.ones(4, 5)
 x3 = torch.mm(x1, x2)
-print(x1, x2, x3,sep='\n')
+print(x1, x2, x3, sep='\n')
 
 #批量矩阵运算
 x1 = torch.FloatTensor(10, 3, 4)
