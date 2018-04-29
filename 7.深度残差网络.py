@@ -135,12 +135,13 @@ for epoch in range(epoch_number):
 
         #用于显示训练过程
         if (i + 1) % 100 == 0:
-            epoch_str=("Epoch [%d/%d], Iter [%d/%d] Loss: %.4f lr: %.5f" %
-                  (epoch + 1, 80, i + 1, len(train_dataset) // batch_size,
-                   loss.item(),learning_rate))
-            print(epoch_str,time_str,sep=" ")
-        
-        # prev_time = cur_time
+            epoch_str = ("Epoch [%d/%d], Iter [%d/%d] Loss: %.4f lr: %.5f" %
+                         (epoch + 1,
+                          80, i + 1, len(train_dataset) // batch_size,
+                          loss.item(), learning_rate))
+            print(epoch_str, time_str, sep=" ")
+
+
 
     #设置学习率衰减
     if (epoch + 1) % 20 == 0:
@@ -148,13 +149,13 @@ for epoch in range(epoch_number):
         optimizer = torch.optim.Adam(resnet.parameters(), lr=learning_rate)
 
 # 9 测试
-correct=0
-total=0
-for images,labels in test_loader:
-    images =images.to(device)
-    outputs=resnet(images)
-    _,predicted=torch.max(outputs.data,1)
-    total +=labels.size(0)
-    correct +=(predicted.cpu()==labels).sum()
+correct = 0
+total = 0
+for images, labels in test_loader:
+    images = images.to(device)
+    outputs = resnet(images)
+    _, predicted = torch.max(outputs.data, 1)
+    total += labels.size(0)
+    correct += (predicted.cpu() == labels).sum()
 
-print("深度残差网络在CIFAR-10数据集上的测试准确率为：%d %%" %(100*correct/total))
+print("深度残差网络在CIFAR-10数据集上的测试准确率为：%d %%" % (100 * correct / total))
