@@ -159,3 +159,5 @@ for images, labels in test_loader:
     correct += (predicted.cpu() == labels).sum()
 
 print("深度残差网络在CIFAR-10数据集上的测试准确率为：%d %%" % (100 * correct / total))
+
+
